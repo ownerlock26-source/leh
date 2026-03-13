@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#D66767">
+    <title>GulfLand Installer</title>
+    <link rel="icon" href="512.png" type="image/png">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* Full page flex centering */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center; /* horizontal */
+            align-items: center;     /* vertical */
+            background: #D66767;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        /* White container */
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border: 7px solid #ccc;
+            /* Adjust position: 10% above center */
+            transform: translateY(-10%);
+            background-color: #A69595;
+            display: flex;
+            flex-direction: column;  /* stack items vertically */
+            align-items: center;     /* center children horizontally */
+            justify-content: center; /* center children vertically (inside container) */
+            border: 7px solid #ccc;
+            padding: 40px;
+            width: 90%;
+            height: 30%;              /* almost full screen width */
+            max-width: 600px;        /* optional max width for bigger screens */
+            background-color: #C0B8B8;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #0055aa;
+            font-size: 95px;
+            margin: 0 0 10px 0;
+        }
+
+        #installBtn {
+            font-size: 55px;
+            padding: 25px 50px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #installBtn:hover {
+            background-color: #218838;
+        }
+
+        #versionInfo {
+            margin-top: 20px;
+            font-size: 45px;
+            color: #333;
+            white-space: pre-line; /* show line breaks */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="companyname">أرض الخليج</h1>
+    <p id="versionInfo">تحميل النسخة...</p>
+    <a id="apkLink" href="app-debug.apk" download>
+        <button id="installBtn">تثبيت التطبيق</button>
+    </a>
+</div>
+
+<script>
+async function loadVersion() {
+    try {
+        // cache-busting with timestamp
+        const res = await fetch(`version.json?cb=${Date.now()}`);
+        const data = await res.json();
+        document.getElementById('versionInfo').innerText =
+            `: الإصدار الحالي \n${data.version}\n${data.changelog}`;
+    } catch (e) {
+        document.getElementById('versionInfo').innerText =
+            'فشل تحميل معلومات الإصدار';
+        console.error(e);
+    }
+}
+loadVersion();
+</script>
+
+</body>
+
+</html>
+
+
