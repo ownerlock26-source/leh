@@ -1,0 +1,22 @@
+{
+  "name": "Update Installer",
+  "short_name": "update",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#00A69595",
+  "theme_color": "#A69595",
+  "icons": [
+    {
+      "src": "512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+    {
+      "src": "192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+
+}
+
