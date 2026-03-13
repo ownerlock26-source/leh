@@ -69,6 +69,24 @@
             white-space: pre-line; /* show line breaks */
         }
     </style>
+    <script src="install.js" defer>
+        
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();      // stop Chrome's default prompt
+  deferredPrompt = e;      // save the event for later
+  document.getElementById('install-btn').style.display = 'block';
+});
+
+document.getElementById('install-btn').addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();               // show prompt
+    const choice = await deferredPrompt.userChoice;
+    deferredPrompt = null;                 // clear after user chooses
+  }
+});
+    </script>
 </head>
 <body>
 
@@ -78,6 +96,7 @@
     <a id="apkLink" href="app-debug.apk" download>
         <button id="installBtn">تثبيت التطبيق</button>
     </a>
+    <button id="install-btn" style="display:none;">Install App</button>
 </div>
 
 <script>
